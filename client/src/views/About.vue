@@ -2,7 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     <draggable v-model="lists" class="list-container">
-      <el-card v-bind:key="list.name" v-for="list in lists">
+      <el-card v-bind:key="list.name" v-for="list in lists" class="list">
         <p>{{ list.name }}</p>
         <draggable v-model="list.cards" group="cards" class="card-container">
           <el-card v-bind:key="card.name" v-for="card in list.cards">
@@ -53,5 +53,11 @@ export default {
 .list-container {
   display: flex;
   flex-direction: row;
+  padding: 10px;
+}
+
+.list {
+  width: 300px;
+  margin: 5px;
 }
 </style>
