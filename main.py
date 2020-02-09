@@ -18,5 +18,6 @@ def get_board(board_id):
 def create_board():
     return jsonify(board.create(request.json))
 
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)

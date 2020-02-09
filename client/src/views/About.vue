@@ -1,8 +1,8 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <draggable v-model="lists" class="list-container">
-      <el-card v-bind:key="list.name" v-for="list in lists" class="list">
+    <draggable v-model="board.lists" class="list-container">
+      <el-card v-bind:key="list.name" v-for="list in board.lists" class="list">
         <p>{{ list.name }}</p>
         <draggable v-model="list.cards" group="cards" class="card-container">
           <el-card v-bind:key="card.name" v-for="card in list.cards">
@@ -16,6 +16,7 @@
 
 <script>
 import draggable from 'vuedraggable'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   components: {
@@ -23,24 +24,16 @@ export default {
   },
   data: function () {
     return {
-      lists: [{
-        name: 'list1',
-        cards: [{
-          name: 'card1'
-        }, {
-          name: 'card2'
-        }, {
-          name: 'card3'
-        }]
-      }, {
-        name: 'list2',
-        cards: [{
-          name: 'card4'
-        }, {
-          name: 'card5'
-        }]
-      }]
     }
+  },
+  computed: {
+    ...mapGetters([ 'board' ])
+  },
+  methods: {
+    ...mapActions([ 'loadBoard' ])
+  },
+  mounted: function () {
+    this.loadBoard(4)
   }
 }
 </script>
