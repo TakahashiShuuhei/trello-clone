@@ -1,22 +1,26 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <div class="list-container">
+    <draggable v-model="lists" class="list-container">
       <el-card v-bind:key="list.name" v-for="list in lists">
         <p>{{ list.name }}</p>
-        <div class="card-container">
+        <draggable v-model="list.cards" group="cards" class="card-container">
           <el-card v-bind:key="card.name" v-for="card in list.cards">
             {{ card.name }}
           </el-card>
-        </div>
+        </draggable>
       </el-card>
-    </div>
+    </draggable>
   </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 
 export default {
+  components: {
+    draggable
+  },
   data: function () {
     return {
       lists: [{
